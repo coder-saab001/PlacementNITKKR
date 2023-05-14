@@ -112,8 +112,8 @@ exports.forgotPassword = catchAsyncErrors(async(req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // As of now, we are changing to frontend, but later, while deploying, we will change as then both frontend and backend will be working on same port
-    user.reset_password_url = `${req.protocol}://${req.get("host")}/reset-password/${reset_token}`;
-    // const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${reset_token}`;
+    // user.reset_password_url = `${req.protocol}://${req.get("host")}/reset-password/${reset_token}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password/${reset_token}`;
 
     try {
         await sendEmail(user, 'forgotPassword');

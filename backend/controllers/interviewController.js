@@ -68,7 +68,8 @@ exports.changeStatus = catchAsyncErrors(async (req, res, next) => {
     if(interview.status === 'pending') {
         interview.status = 'approved';
         await interview.save();
-        interview.url = `${req.protocol}://${req.get("host")}/experience/${interview._id}`;
+        // interview.url = `${req.protocol}://${req.get("host")}/experience/${interview._id}`;
+        interview.url = `${process.env.FRONTEND_URL}/experience/${interview._id}`;
         try {
             await sendEmail(interview, 'approveInterviewExperience');
         } catch {
