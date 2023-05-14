@@ -71,6 +71,7 @@ exports.sendOTP = catchAsyncErrors(async(req, res, next) => {
         return next(new ErrorHandler("Invalid college ID or password", 401));
     } else {
         const login_otp = user.getOTP();
+        console.log(login_otp)
         await user.save({ validateBeforeSave: false });
         const message = 'Hello <strong>'+ user.name + '</strong>,<br><br>A sign in attempt to Placement Portal requires further verification to prevent unauthorized access to your account. To complete the sign in, enter the verification code on the Placement Portal.<br><br>Verification Code: ' + login_otp;
         try {
